@@ -15,7 +15,7 @@ void SnakeHunter::Update(Snake &snake)
   if (snake_cell.x == hunter_cell.x && snake_cell.y == hunter_cell.y)
   {
     snake.alive = false;
-    rendezvous = true;
+    snake.hunted = true;
   }
   else
   {

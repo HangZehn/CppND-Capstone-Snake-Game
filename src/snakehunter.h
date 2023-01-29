@@ -26,7 +26,6 @@ private:
 
   int grid_width;
   int grid_height;
-  bool rendezvous; // if snake is hunted
 };
 
 #endif

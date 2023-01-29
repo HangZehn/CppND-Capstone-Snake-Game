@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <random>
+#include <string>
 #include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
@@ -16,6 +17,7 @@ public:
            std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
+  std::string GetDeathCause() const;
 
 private:
   Snake snake;

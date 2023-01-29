@@ -35,6 +35,8 @@ public:
   float head_y;
   std::vector<SDL_Point> body;
   bool hunted;
+  bool hit_tail;
+  bool hit_wall;
 
 private:
   void UpdateHead();

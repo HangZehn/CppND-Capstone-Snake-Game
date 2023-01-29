@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include <string>
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
@@ -99,3 +100,20 @@ void Game::Update()
 
 int Game::GetScore() const { return score; }
 int Game::GetSize() const { return snake.size; }
+std::string Game::GetDeathCause() const
+{
+  std::string cause_of_death;
+  if (snake.hit_tail == true)
+  {
+    cause_of_death = "it hit its own tail.";
+  };
+  if (snake.hit_wall == true)
+  {
+    cause_of_death = "it hit the wall.";
+  };
+  if (snake.hunted == true)
+  {
+    cause_of_death = "it was taken by the hunter.";
+  };
+  return cause_of_death;
+}
