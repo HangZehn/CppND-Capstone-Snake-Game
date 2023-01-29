@@ -83,8 +83,8 @@ void Renderer::Render(Snake const snake, SnakeHunter const snakehunter, SDL_Poin
 
   // Render snakehunter
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
-  block.x = snakehunter.head_x * block.w;
-  block.y = snakehunter.head_y * block.h;
+  block.x = static_cast<int>(snakehunter.head_x) * block.w;
+  block.y = static_cast<int>(snakehunter.head_y) * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Update Screen

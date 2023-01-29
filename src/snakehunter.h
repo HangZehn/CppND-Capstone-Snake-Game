@@ -17,7 +17,6 @@ public:
   void Update(Snake &snake);
 
   float speed{0.05f};
-  int size{1};
   float head_x;
   float head_y;
 
