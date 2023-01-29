@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "snake.h"
 #include "snakehunter.h"
+
 class Game
 {
 public:

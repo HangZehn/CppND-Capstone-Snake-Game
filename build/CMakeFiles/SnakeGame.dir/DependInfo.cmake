@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/main.cpp" "CMakeFiles/SnakeGame.dir/src/main.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/main.cpp.o.d"
   "/home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/renderer.cpp" "CMakeFiles/SnakeGame.dir/src/renderer.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/renderer.cpp.o.d"
   "/home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/snake.cpp" "CMakeFiles/SnakeGame.dir/src/snake.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/snake.cpp.o.d"
+  "/home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/snakehunter.cpp" "CMakeFiles/SnakeGame.dir/src/snakehunter.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/snakehunter.cpp.o.d"
   )
 
 # Targets to which this target links.

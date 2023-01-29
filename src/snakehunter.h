@@ -8,24 +8,25 @@
 class SnakeHunter
 {
 public:
-    SnakeHunter(int grid_width, int grid_height)
-        : grid_width(grid_width),
-          grid_height(grid_height),
-          head_x(grid_width / 2),
-          head_y(grid_height / 2) {}
+  SnakeHunter(int grid_width, int grid_height)
+      : grid_width(grid_width),
+        grid_height(grid_height),
+        head_x(grid_width / 8),
+        head_y(grid_height / 8) {}
 
-    void Update(Snake &snake);
+  void Update(Snake &snake);
 
-    float speed{0.1f};
-    int size{1};
-    float head_x;
-    float head_y;
+  float speed{0.05f};
+  int size{1};
+  float head_x;
+  float head_y;
 
 private:
-    void ChaseSnake(float head_x, float head_y, SDL_Point snake_cell);
+  void ChaseSnake(SDL_Point snake_cell);
 
-    int grid_width;
-    int grid_height;
+  int grid_width;
+  int grid_height;
+  bool rendezvous; // if snake is hunted
 };
 
 #endif

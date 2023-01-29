@@ -264,6 +264,7 @@ CMakeFiles/SnakeGame.dir/src/game.cpp.o: \
  /home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/controller.h \
  /home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/snake.h \
  /home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/renderer.h \
+ /home/hanzhang.ren/Github/CppND-Capstone-Snake-Game/src/snakehunter.h \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/exception \
  /usr/include/c++/11/bits/exception_ptr.h \
