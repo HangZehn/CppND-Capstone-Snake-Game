@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <memory>
 #include <random>
 #include <string>
 #include "SDL.h"
@@ -20,8 +21,10 @@ public:
   std::string GetDeathCause() const;
 
 private:
-  Snake snake;
-  SnakeHunter snakehunter;
+  // Snake snake;
+  // SnakeHunter snakehunter;
+  std::unique_ptr<Snake> snake_ptr;
+  std::unique_ptr<SnakeHunter> snake_hunter_ptr;
   SDL_Point food;
 
   std::random_device dev;

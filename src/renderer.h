@@ -1,6 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <memory>
 #include <vector>
 #include "SDL.h"
 #include "snake.h"
@@ -13,7 +14,7 @@ public:
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(Snake const snake, SnakeHunter const snakehunter, SDL_Point const &food);
+  void Render(std::unique_ptr<Snake> &snake_ptr, std::unique_ptr<SnakeHunter> &snake_hunter_ptr, SDL_Point const &food);
   void UpdateWindowTitle(int score, int fps);
 
 private:

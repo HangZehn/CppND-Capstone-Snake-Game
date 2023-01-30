@@ -2,20 +2,20 @@
 #include <cmath>
 #include <iostream>
 
-void SnakeHunter::Update(Snake &snake)
+void SnakeHunter::Update(std::unique_ptr<Snake> &snake_ptr)
 {
   SDL_Point hunter_cell{
       static_cast<int>(head_x),
       static_cast<int>(head_y)};
 
   SDL_Point snake_cell{
-      static_cast<int>(snake.head_x),
-      static_cast<int>(snake.head_y)};
+      static_cast<int>(snake_ptr->head_x),
+      static_cast<int>(snake_ptr->head_y)};
 
   if (snake_cell.x == hunter_cell.x && snake_cell.y == hunter_cell.y)
   {
-    snake.alive = false;
-    snake.hunted = true;
+    snake_ptr->alive = false;
+    snake_ptr->hunted = true;
   }
   else
   {

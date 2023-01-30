@@ -2,6 +2,7 @@
 #define SNAKEHUNTER_H
 
 #include <vector>
+#include <memory>
 #include "SDL.h"
 #include "snake.h"
 
@@ -14,7 +15,9 @@ public:
         head_x(grid_width / 8),
         head_y(grid_height / 8) {}
 
-  void Update(Snake &snake);
+  ~SnakeHunter() {}
+
+  void Update(std::unique_ptr<Snake> &snake_ptr);
 
   float speed{0.05f};
   float head_x;

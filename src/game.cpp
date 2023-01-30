@@ -4,11 +4,12 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height), snakehunter(grid_width, grid_height),
-      engine(dev()),
+    : engine(dev()),
       random_w(1, static_cast<int>(grid_width - 2)),
       random_h(1, static_cast<int>(grid_height - 2))
 {
+  snake_ptr = std::make_unique<Snake>(grid_width, grid_height);
+  snake_hunter_ptr = std::make_unique<SnakeHunter>(grid_width, grid_height);
   PlaceFood();
 }
 
@@ -27,9 +28,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, snake);
+    controller.HandleInput(running, snake_ptr);
     Update();
-    renderer.Render(snake, snakehunter, food);
+    renderer.Render(snake_ptr, snake_hunter_ptr, food);
 
     frame_end = SDL_GetTicks();
 
@@ -65,7 +66,7 @@ void Game::PlaceFood()
     y = random_h(engine);
     // Check that the location is not occupied by a snake item before placing
     // food.
-    if (!snake.SnakeCell(x, y))
+    if (!snake_ptr->SnakeCell(x, y))
     {
       food.x = x;
       food.y = y;
@@ -76,13 +77,13 @@ void Game::PlaceFood()
 
 void Game::Update()
 {
-  if (!snake.alive)
+  if (!snake_ptr->alive)
     return;
 
-  snake.Update();
+  snake_ptr->Update();
 
-  int new_x = static_cast<int>(snake.head_x);
-  int new_y = static_cast<int>(snake.head_y);
+  int new_x = static_cast<int>(snake_ptr->head_x);
+  int new_y = static_cast<int>(snake_ptr->head_y);
 
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y)
@@ -90,28 +91,28 @@ void Game::Update()
     score++;
     PlaceFood();
     // Grow snake and increase speed.
-    snake.GrowBody();
-    snake.speed += 0.02;
-    snakehunter.speed += 0.02;
+    snake_ptr->GrowBody();
+    snake_ptr->speed += 0.02;
+    snake_hunter_ptr->speed += 0.02;
   }
 
-  snakehunter.Update(snake);
+  snake_hunter_ptr->Update(snake_ptr);
 }
 
 int Game::GetScore() const { return score; }
-int Game::GetSize() const { return snake.size; }
+int Game::GetSize() const { return snake_ptr->size; }
 std::string Game::GetDeathCause() const
 {
   std::string cause_of_death;
-  if (snake.hit_tail == true)
+  if (snake_ptr->hit_tail == true)
   {
     cause_of_death = "it hit its own tail.";
   };
-  if (snake.hit_wall == true)
+  if (snake_ptr->hit_wall == true)
   {
     cause_of_death = "it hit the wall.";
   };
-  if (snake.hunted == true)
+  if (snake_ptr->hunted == true)
   {
     cause_of_death = "it was taken by the hunter.";
   };

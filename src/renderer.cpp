@@ -43,7 +43,7 @@ Renderer::~Renderer()
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, SnakeHunter const snakehunter, SDL_Point const &food)
+void Renderer::Render(std::unique_ptr<Snake> &snake_ptr, std::unique_ptr<SnakeHunter> &snake_hunter_ptr, SDL_Point const &food)
 {
   SDL_Rect block;
   block.w = screen_width / grid_width;
@@ -61,7 +61,7 @@ void Renderer::Render(Snake const snake, SnakeHunter const snakehunter, SDL_Poin
 
   // Render snake's body
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  for (SDL_Point const &point : snake.body)
+  for (SDL_Point const &point : snake_ptr->body)
   {
     block.x = point.x * block.w;
     block.y = point.y * block.h;
@@ -69,9 +69,9 @@ void Renderer::Render(Snake const snake, SnakeHunter const snakehunter, SDL_Poin
   }
 
   // Render snake's head
-  block.x = static_cast<int>(snake.head_x) * block.w;
-  block.y = static_cast<int>(snake.head_y) * block.h;
-  if (snake.alive)
+  block.x = static_cast<int>(snake_ptr->head_x) * block.w;
+  block.y = static_cast<int>(snake_ptr->head_y) * block.h;
+  if (snake_ptr->alive)
   {
     SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
   }
@@ -83,8 +83,8 @@ void Renderer::Render(Snake const snake, SnakeHunter const snakehunter, SDL_Poin
 
   // Render snakehunter
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
-  block.x = static_cast<int>(snakehunter.head_x) * block.w;
-  block.y = static_cast<int>(snakehunter.head_y) * block.h;
+  block.x = static_cast<int>(snake_hunter_ptr->head_x) * block.w;
+  block.y = static_cast<int>(snake_hunter_ptr->head_y) * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Update Screen
