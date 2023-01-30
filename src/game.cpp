@@ -13,7 +13,7 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
   PlaceFood();
 }
 
-void Game::Run(Controller const &controller, Renderer &renderer,
+void Game::Run(std::unique_ptr<Controller> &controller_ptr, std::unique_ptr<Renderer> &renderer_ptr,
                std::size_t target_frame_duration)
 {
   Uint32 title_timestamp = SDL_GetTicks();
@@ -28,9 +28,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, snake_ptr);
+    controller_ptr->HandleInput(running, snake_ptr);
     Update();
-    renderer.Render(snake_ptr, snake_hunter_ptr, food);
+    renderer_ptr->Render(snake_ptr, snake_hunter_ptr, food);
 
     frame_end = SDL_GetTicks();
 
@@ -42,7 +42,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000)
     {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer_ptr->UpdateWindowTitle(score, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
     }

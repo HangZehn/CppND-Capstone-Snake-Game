@@ -12,13 +12,14 @@ int main()
   constexpr std::size_t kGridWidth{32};
   constexpr std::size_t kGridHeight{32};
 
-  Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  Controller controller;
-  Game game(kGridWidth, kGridHeight);
-  game.Run(controller, renderer, kMsPerFrame);
+  std::unique_ptr<Renderer> renderer_ptr = std::make_unique<Renderer>(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+  std::unique_ptr<Controller> controller_ptr = std::make_unique<Controller>();
+
+  std::unique_ptr<Game> game_ptr = std::make_unique<Game>(kGridWidth, kGridHeight);
+  game_ptr->Run(controller_ptr, renderer_ptr, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
-  std::cout << "The snake died because " << game.GetDeathCause() << "\n";
-  std::cout << "Score: " << game.GetScore() << "\n";
-  std::cout << "Size: " << game.GetSize() << "\n";
+  std::cout << "The snake died because " << game_ptr->GetDeathCause() << "\n";
+  std::cout << "Score: " << game_ptr->GetScore() << "\n";
+  std::cout << "Size: " << game_ptr->GetSize() << "\n";
   return 0;
 }
