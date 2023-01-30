@@ -25,8 +25,6 @@ void SnakeHunter::Update(std::unique_ptr<Snake> &snake_ptr)
 
 void SnakeHunter::ChaseSnake(SDL_Point snake_cell)
 {
-  // TODO pointer stuff
-
   float delta_x = snake_cell.x - head_x;
   float delta_y = snake_cell.y - head_y;
   float distance = sqrt(pow(snake_cell.x - head_x, 2) + pow(snake_cell.y - head_y, 2));
