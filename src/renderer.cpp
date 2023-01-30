@@ -82,9 +82,16 @@ void Renderer::Render(std::unique_ptr<Snake> &snake_ptr, std::unique_ptr<SnakeHu
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Render snakehunter
-  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
   block.x = static_cast<int>(snake_hunter_ptr->head_x) * block.w;
   block.y = static_cast<int>(snake_hunter_ptr->head_y) * block.h;
+  if (snake_ptr->alive)
+  {
+    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+  }
+  else
+  {
+    SDL_SetRenderDrawColor(sdl_renderer, 0x69, 0x69, 0x69, 0xFF);
+  }
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Update Screen
